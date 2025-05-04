@@ -90,20 +90,72 @@
   <script>
     const questions = {
       1: [
-        { question: "What is 1 + 1?", options: ["1", "2", "3", "4"], answer: "2" },
-        { question: "What color is the sky?", options: ["Green", "Blue", "Red", "Yellow"], answer: "Blue" },
+        {
+          question: "What is the correct way to get user input in Python?",
+          options: ["input()", "read()", "get()", "scanf()"],
+          answer: "input()"
+        },
+        {
+          question: "Which line prints a variable `name`?",
+          options: ["print name", "echo(name)", "print(name)", "printf(name)"],
+          answer: "print(name)"
+        },
+        {
+          question: "What is the output of:\n\nprint(\"Hello\" + \"World\")",
+          options: ["HelloWorld", "Hello World", "Hello+World", "Error"],
+          answer: "HelloWorld"
+        }
       ],
       2: [
-        { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Venus", "Jupiter"], answer: "Mars" },
-        { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Lisbon"], answer: "Paris" },
+        {
+          question: "What is the output of:\n\nlen([1, 2, 3])",
+          options: ["2", "3", "4", "Error"],
+          answer: "3"
+        },
+        {
+          question: "Which function adds an item to a list?",
+          options: ["push()", "add()", "append()", "insert()"],
+          answer: "append()"
+        },
+        {
+          question: "How do you access the first item in a list `nums = [10, 20, 30]`?",
+          options: ["nums[0]", "nums(0)", "nums{1}", "nums[1]"],
+          answer: "nums[0]"
+        }
       ],
       3: [
-        { question: "Who developed the theory of relativity?", options: ["Newton", "Einstein", "Tesla", "Hawking"], answer: "Einstein" },
-        { question: "What is the square root of 144?", options: ["10", "11", "12", "13"], answer: "12" },
+        {
+          question: "What is the output of:\n\nprint(bool([]))",
+          options: ["True", "False", "None", "Error"],
+          answer: "False"
+        },
+        {
+          question: "What will this output?\n\nx = [1, 2, 3]\nprint(x * 2)",
+          options: ["[2, 4, 6]", "[1, 2, 3, 1, 2, 3]", "[2, 2, 2]", "Error"],
+          answer: "[1, 2, 3, 1, 2, 3]"
+        },
+        {
+          question: "What happens if you use `list.remove(5)` when 5 is not in the list?",
+          options: ["Does nothing", "Removes the last item", "Raises an error", "Returns None"],
+          answer: "Raises an error"
+        }
       ],
       4: [
-        { question: "What is the derivative of sin(x)?", options: ["cos(x)", "-cos(x)", "-sin(x)", "tan(x)"], answer: "cos(x)" },
-        { question: "Which element has the atomic number 82?", options: ["Gold", "Lead", "Iron", "Zinc"], answer: "Lead" },
+        {
+          question: "What does this function do?\n\ndef count_up(n):\n    for i in range(1, n+1):\n        print(i)",
+          options: ["Prints 1 to n", "Prints 0 to n", "Prints n times", "Error"],
+          answer: "Prints 1 to n"
+        },
+        {
+          question: "How many times will this loop run?\n\nfor i in range(2, 10, 2):\n    print(i)",
+          options: ["4", "5", "6", "8"],
+          answer: "4"
+        },
+        {
+          question: "What is the output?\n\ndef repeat(word):\n    return word * 2\n\nprint(repeat('hi'))",
+          options: ["hi", "hihi", "hi hi", "Error"],
+          answer: "hihi"
+        }
       ]
     };
 
