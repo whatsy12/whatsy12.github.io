@@ -1,35 +1,119 @@
-<div style="width: 1348px; height: 648.11px; position: relative">
-  <div style="width: 620px; height: 648.11px; left: 364px; top: 0px; position: absolute">
-    <div style="width: 454.06px; height: 78.53px; left: 82.97px; top: 40px; position: absolute">
-      <div style="width: 454px; height: 50px; left: 0.03px; top: -3px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 44px; font-family: Roboto; font-weight: 700; line-height: 48.40px; word-wrap: break-word">모의시험 AI</div>
-      <div style="width: 223px; height: 20.14px; left: 115.53px; top: 58.39px; position: absolute; opacity: 0.70"></div>
-    </div>
-    <div style="width: 588px; height: 412px; left: 16px; top: 143px; position: absolute; background: white; box-shadow: 0px 12px 12px -7px rgba(0, 0, 0, 0.04); border-radius: 16px; overflow: hidden">
-      <div style="width: 111px; left: 34px; top: 21.47px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 14px; font-family: Roboto; font-weight: 500; line-height: 21.70px; word-wrap: break-word">문제 지문</div>
-      <div style="width: 247px; height: 203px; left: 34px; top: 44px; position: absolute; background: #F2F2F2; border-radius: 4px">
-        <div style="width: 245px; left: 15px; top: 5.31px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #BEC4D0; font-size: 12px; font-family: Roboto; font-weight: 400; line-height: 24.80px; word-wrap: break-word">문제의 지문을 여기에 입력해 주세요!</div>
-      </div>
-      <div style="width: 100.51px; height: 20px; left: 83px; top: 286px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 14px; font-family: Roboto; font-weight: 400; line-height: 20px; word-wrap: break-word">모두 객관식</div>
-      <div style="width: 20px; height: 20px; left: 51px; top: 286px; position: absolute; background: white; border-radius: 4px; border: 1px #D3DAE7 solid"></div>
-      <div style="width: 100.51px; height: 20px; left: 287px; top: 286px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 14px; font-family: Roboto; font-weight: 400; line-height: 20px; word-wrap: break-word">모두 주관식</div>
-      <div style="width: 20px; height: 20px; left: 255px; top: 286px; position: absolute; background: white; border-radius: 4px; border: 1px #D3DAE7 solid"></div>
-      <div style="width: 100.51px; left: 470px; top: 286px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 14px; font-family: Roboto; font-weight: 400; line-height: 20px; word-wrap: break-word">객/주 관식</div>
-      <div style="width: 20px; height: 20px; left: 437px; top: 286px; position: absolute; background: white; border-radius: 4px; border: 1px #D3DAE7 solid"></div>
-    </div>
-    <div style="width: 130.50px; height: 46px; left: 245px; top: 489px; position: absolute; background: #6781FF; border-radius: 25px">
-      <div style="width: 68.50px; height: 18px; left: 31px; top: 14px; position: absolute">
-        <div style="width: 68.50px; height: 24.80px; left: 0px; top: -3.39px; position: absolute">
-          <div style="width: 68.70px; height: 19px; left: 0px; top: 2px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: #FFFBFB; font-size: 13px; font-family: Roboto; font-weight: 600; line-height: 24.80px; word-wrap: break-word">시험 만들기</div>
-        </div>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pop Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #quiz-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+      max-width: 90%;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .option {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      background: #e0e7ff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .option:hover {
+      background: #c7d2fe;
+    }
+
+    #score {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="quiz-container">
+    <h2 id="question">Loading question...</h2>
+    <div id="options"></div>
+    <div id="score"></div>
   </div>
-  <div style="width: 261px; height: 203px; left: 690px; top: 187px; position: absolute; background: white; border-radius: 18px; border: 1px rgba(0, 0, 0, 0.07) solid">
-    <div style="width: 186px; height: 21px; left: 37px; top: 128px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 13px; font-family: Roboto; font-weight: 600; line-height: 22.10px; word-wrap: break-word">이미지 파일을 끌어다 놓아주세요</div>
-    <div style="width: 169px; height: 56px; left: 46px; top: 45px; position: absolute; background: #6781FF; border-radius: 25px; overflow: hidden">
-      <div style="width: 217.22px; height: 56px; left: -25px; top: 0px; position: absolute">
-        <div style="width: 156px; height: 17px; left: 56px; top: 20px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 17px; font-family: Roboto; font-weight: 600; line-height: 22.10px; word-wrap: break-word">이미지 업로드</div>
-      </div>
-    </div>
-  </div>
-</div>
+
+  <script>
+    const quiz = [
+      {
+        question: "What is the capital of France?",
+        options: ["Berlin", "Paris", "Madrid", "Rome"],
+        answer: "Paris"
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        options: ["Earth", "Saturn", "Mars", "Jupiter"],
+        answer: "Mars"
+      },
+      {
+        question: "What is 2 + 2?",
+        options: ["3", "4", "5", "6"],
+        answer: "4"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const scoreEl = document.getElementById('score');
+
+    function loadQuestion() {
+      const q = quiz[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = '';
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.className = 'option';
+        btn.onclick = () => selectAnswer(option);
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(selected) {
+      const correct = quiz[currentQuestion].answer;
+      if (selected === correct) {
+        score++;
+      }
+      currentQuestion++;
+      if (currentQuestion < quiz.length) {
+        loadQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      questionEl.textContent = "Quiz Complete!";
+      optionsEl.innerHTML = '';
+      scoreEl.textContent = `You scored ${score} out of ${quiz.length}`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
