@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pop Quiz</title>
+  <title>Adaptive Pop Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -22,10 +22,6 @@
       max-width: 90%;
     }
 
-    h2 {
-      margin-bottom: 1rem;
-    }
-
     .option {
       display: block;
       margin: 0.5rem 0;
@@ -34,7 +30,6 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
     .option:hover {
@@ -73,55 +68,71 @@
       margin-top: 1rem;
       font-weight: bold;
     }
+
+    #level {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #666;
+    }
   </style>
 </head>
 <body>
 
   <div id="quiz-container">
-    <h2 id="question">Loading question...</h2>
+    <h2 id="question">Loading...</h2>
     <div id="options"></div>
     <div id="feedback"></div>
     <button id="next-btn">Next</button>
     <div id="score"></div>
+    <div id="level"></div>
   </div>
 
   <script>
-    // 🎯 Easy-to-edit quiz format
-    const quiz = [
-      {
-        question: "What is the capital of France?",
-        options: ["Berlin", "Paris", "Madrid", "Rome"],
-        answer: "Paris"
-      },
-      {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Saturn", "Mars", "Jupiter"],
-        answer: "Mars"
-      },
-      {
-        question: "What is 2 + 2?",
-        options: ["3", "4", "5", "6"],
-        answer: "4"
-      }
-    ];
+    const questions = {
+      1: [
+        { question: "What is 1 + 1?", options: ["1", "2", "3", "4"], answer: "2" },
+        { question: "What color is the sky?", options: ["Green", "Blue", "Red", "Yellow"], answer: "Blue" },
+      ],
+      2: [
+        { question: "Which planet is known as the Red Planet?", options: ["Earth", "Mars", "Venus", "Jupiter"], answer: "Mars" },
+        { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Lisbon"], answer: "Paris" },
+      ],
+      3: [
+        { question: "Who developed the theory of relativity?", options: ["Newton", "Einstein", "Tesla", "Hawking"], answer: "Einstein" },
+        { question: "What is the square root of 144?", options: ["10", "11", "12", "13"], answer: "12" },
+      ],
+      4: [
+        { question: "What is the derivative of sin(x)?", options: ["cos(x)", "-cos(x)", "-sin(x)", "tan(x)"], answer: "cos(x)" },
+        { question: "Which element has the atomic number 82?", options: ["Gold", "Lead", "Iron", "Zinc"], answer: "Lead" },
+      ]
+    };
 
-    let currentQuestion = 0;
     let score = 0;
+    let difficulty = 2; // Start at medium
+    let currentQuestion = null;
 
     const questionEl = document.getElementById('question');
     const optionsEl = document.getElementById('options');
     const feedbackEl = document.getElementById('feedback');
     const nextBtn = document.getElementById('next-btn');
     const scoreEl = document.getElementById('score');
+    const levelEl = document.getElementById('level');
+
+    function getRandomQuestion(level) {
+      const pool = questions[level];
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
 
     function loadQuestion() {
-      const q = quiz[currentQuestion];
-      questionEl.textContent = q.question;
+      currentQuestion = getRandomQuestion(difficulty);
+      questionEl.textContent = currentQuestion.question;
       optionsEl.innerHTML = '';
       feedbackEl.textContent = '';
       nextBtn.style.display = 'none';
+      scoreEl.textContent = `Score: ${score}`;
+      levelEl.textContent = `Difficulty Level: ${difficulty}`;
 
-      q.options.forEach(option => {
+      currentQuestion.options.forEach(option => {
         const btn = document.createElement('button');
         btn.textContent = option;
         btn.className = 'option';
@@ -131,39 +142,28 @@
     }
 
     function selectAnswer(button, selected) {
-      const correctAnswer = quiz[currentQuestion].answer;
+      const correct = currentQuestion.answer;
       const allButtons = document.querySelectorAll('.option');
 
       allButtons.forEach(btn => btn.disabled = true);
 
-      if (selected === correctAnswer) {
+      if (selected === correct) {
         button.classList.add('correct');
         feedbackEl.textContent = "✅ Correct!";
         score++;
+        if (difficulty < 4) difficulty++; // move up
       } else {
         button.classList.add('incorrect');
-        feedbackEl.textContent = `❌ Incorrect. Correct answer: ${correctAnswer}`;
+        feedbackEl.textContent = `❌ Incorrect. Correct answer: ${correct}`;
+        if (difficulty > 1) difficulty--; // move down
       }
 
       nextBtn.style.display = 'inline-block';
     }
 
     nextBtn.onclick = () => {
-      currentQuestion++;
-      if (currentQuestion < quiz.length) {
-        loadQuestion();
-      } else {
-        showScore();
-      }
+      loadQuestion();
     };
-
-    function showScore() {
-      questionEl.textContent = "Quiz Complete!";
-      optionsEl.innerHTML = '';
-      feedbackEl.textContent = '';
-      nextBtn.style.display = 'none';
-      scoreEl.textContent = `You scored ${score} out of ${quiz.length}`;
-    }
 
     loadQuestion();
   </script>
