@@ -452,7 +452,7 @@
         {
           "question": "Which function will sort a list in descending order?",
           "options": ["sorted(l, reverse=True)", "sorted(l, reverse=False)", "reversed(sorted(l))", "sort_desc(l)"],
-          "answer": "sort(l, reverse=True)"
+          "answer": "sorted(l, reverse=True)"
         },
         {
           "question": "How do you join two lists element-wise in Python?",
@@ -563,7 +563,7 @@
         },
         {
           "question": "Which of the following expressions is valid?",
-          "options": ["sum(reversed([1, 2]))", "sorted(reversed([1, '2']))", "len(reversed([1, 2]))", "reversed([1, 2])[1]"],
+          "options": ["sum(reversed([1, 2]))", "sorted(reversed([1, '2']))", "len(reversed([1, 2]))", "list(reversed([1, 2]))[0]"],
           "answer": "list(reversed([1, 2]))[0]"
         },
         {
@@ -618,8 +618,8 @@
         },
         {
           "question": "Which of these will give the correct number of elements in a 2D list?",
-          "options": ["len(list)", "len(list[0])", "sum(len(row) for row in list)", "len(list) * len(list[0])"],
-          "answer": "sum(len(row) for row in list)"
+          "options": ["len(list)", "len(list[0])", "sum([len(row) for row in list])", "len(list) * len(list[0])"],
+          "answer": "sum([len(row) for row in list])"
         },
         {
           "question": "What is the output of list(zip(range(3), range(100)))?",
@@ -653,7 +653,7 @@
         },
         {
           "question": "홍승기는 잘생겼다",
-          "options": ["YES'", "YES", "YES", "YES"],
+          "options": ["YES", "YES", "YES", "YES"],
           "answer": "YES"
         },
         {
