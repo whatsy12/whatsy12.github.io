@@ -314,6 +314,7 @@
   <div id="level-info">
     <div id="level-name">Python Basics <span class="level-badge">Level 1</span></div>
     <div id="level-description">Learn the fundamental concepts of Python</div>
+    <div class="questions-counter">Question <span id="question-number">1</span> of 5</div>
   </div>
   
   <div id="stats-display">
@@ -899,7 +900,7 @@
     // Constants for level progression
     const STREAK_TO_LEVEL_UP = 3;
     const WRONG_TO_LEVEL_DOWN = 3;
-    const QUESTIONS_PER_LEVEL = 5;
+    let QUESTIONS_PER_LEVEL = 40;
     
     // Elements
     const questionEl = document.getElementById('question');
@@ -974,6 +975,9 @@
       // Check if we should level up
       if (streak >= STREAK_TO_LEVEL_UP && currentLevel < 4) {
         currentLevel++;
+        if (currentLevel > 2) {
+            QUESTIONS_PER_LEVEL = 10;
+        }
         streak = 0;
         showNotification(`Level up! You're now at Level ${currentLevel}`, 'levelup');
         updateLevelInfo();
@@ -984,6 +988,9 @@
       // Check if we should level down
       if (wrongCount >= WRONG_TO_LEVEL_DOWN && currentLevel > 1) {
         currentLevel--;
+        if (currentLevel <= 2) {
+            QUESTIONS_PER_LEVEL = 40;
+        }
         wrongCount = 0;
         showNotification(`You need more practice. Going back to Level ${currentLevel}`, 'leveldown');
         updateLevelInfo();
