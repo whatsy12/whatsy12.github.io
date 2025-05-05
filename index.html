@@ -314,7 +314,7 @@
   <div id="level-info">
     <div id="level-name">Python Basics <span class="level-badge">Level 1</span></div>
     <div id="level-description">Learn the fundamental concepts of Python</div>
-    <div class="questions-counter">Question <span id="question-number">1</span> of 5</div>
+    <div class="questions-counter">Question <span id="question-number">1</span> of <span id="question-level">40</span></div>
   </div>
   
   <div id="stats-display">
@@ -917,7 +917,8 @@
     const wrongCountEl = document.getElementById('wrong-count');
     const streakCountEl = document.getElementById('streak-count');
     const questionNumberEl = document.getElementById('question-number');
-    
+    const questionPerLevelEl = document.getElementById('question-level');
+
     // Current question data
     let currentQuestion = null;
     let currentLevelQuestions = [];
@@ -1037,6 +1038,7 @@
       
       // Update question counter
       questionNumberEl.textContent = (currentQuestionIndex % QUESTIONS_PER_LEVEL) + 1;
+      questionPerLevelEl.textContent = QUESTIONS_PER_LEVEL;
       
       // Shuffle options for better learning
       const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
