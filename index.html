@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Python Quest: Learn Python Step by Step</title>
+  <title>Python Quest: Dynamic Learning</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
     
@@ -88,6 +88,10 @@
     
     #xp {
       color: var(--xp);
+    }
+
+    #score {
+      color: var(--blue);
     }
     
     #quiz-container {
@@ -186,7 +190,6 @@
       font-family: 'Nunito', sans-serif;
       box-shadow: 0 4px 0 var(--primary-hover);
       margin-top: 15px;
-      display: none;
     }
     
     #next-btn:hover {
@@ -233,97 +236,31 @@
       margin-left: 8px;
     }
     
-    /* Topic selector */
-    #topic-selector {
-      display: flex;
-      width: 100%;
-      max-width: 500px;
-      overflow-x: auto;
-      padding: 10px 0;
-      margin-bottom: 15px;
-      scrollbar-width: none;
-    }
-    
-    #topic-selector::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .topic {
-      flex: 0 0 auto;
-      padding: 8px 15px;
-      background: white;
-      border-radius: 20px;
-      margin-right: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    .topic.active {
-      background: var(--primary);
-      color: white;
-    }
-    
-    #lesson-complete {
+    #notification {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    
-    .lesson-complete-content {
+      top: 20px;
+      right: 20px;
       background: white;
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 90%;
-      width: 400px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      display: none;
+      z-index: 100;
+      transition: all 0.3s ease;
+      transform: translateX(150%);
     }
     
-    .xp-circle {
-      width: 120px;
-      height: 120px;
-      background: #fff4cc;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto 20px;
+    #notification.show {
+      transform: translateX(0);
+      display: block;
     }
     
-    .xp-text {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--xp);
+    .notification-levelup {
+      border-left: 4px solid var(--primary);
     }
     
-    .continue-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      margin-top: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 0 var(--primary-hover);
-    }
-    
-    .continue-btn:hover {
-      background: var(--primary-hover);
-    }
-    
-    .continue-btn:active {
-      transform: translateY(2px);
-      box-shadow: 0 0 0 var(--primary-hover);
+    .notification-leveldown {
+      border-left: 4px solid var(--wrong);
     }
     
     .code-example {
@@ -333,6 +270,25 @@
       font-family: monospace;
       margin: 10px 0;
       white-space: pre-wrap;
+    }
+    
+    #stats-display {
+      background: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .questions-counter {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -345,6 +301,10 @@
     <div class="progress-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
+    <div class="stat" id="score">
+      <span class="stat-icon">🏆</span>
+      <span class="stat-value">0</span>
+    </div>
     <div class="stat" id="xp">
       <span class="stat-icon">⭐</span>
       <span class="stat-value">0</span>
@@ -354,13 +314,13 @@
   <div id="level-info">
     <div id="level-name">Python Basics <span class="level-badge">Level 1</span></div>
     <div id="level-description">Learn the fundamental concepts of Python</div>
+    <div class="questions-counter">Question <span id="question-number">1</span> of 5</div>
   </div>
   
-  <div id="topic-selector">
-    <div class="topic active" data-topic="level1">Level 1</div>
-    <div class="topic" data-topic="level2">Level 2</div>
-    <div class="topic" data-topic="level3">Level 3</div>
-    <div class="topic" data-topic="level4">Level 4</div>
+  <div id="stats-display">
+    <div>Correct: <span id="correct-count">0</span></div>
+    <div>Streak: <span id="streak-count">0</span></div>
+    <div>Wrong: <span id="wrong-count">0</span></div>
   </div>
 
   <div id="quiz-container">
@@ -369,19 +329,10 @@
     </div>
     
     <div id="options"></div>
-    <button id="next-btn">CONTINUE</button>
+    <button id="next-btn">NEXT QUESTION</button>
   </div>
   
-  <div id="lesson-complete">
-    <div class="lesson-complete-content">
-      <div class="xp-circle">
-        <div class="xp-text">+10</div>
-      </div>
-      <h2>Level Complete!</h2>
-      <p>You've completed this Python level</p>
-      <button class="continue-btn" onclick="closeCompletionModal()">CONTINUE</button>
-    </div>
-  </div>
+  <div id="notification"></div>
 
   <script>
     const questions = {
@@ -790,7 +741,7 @@
         }
       ],
       level3: [
-        {
+          {
           "question": "What is the result of: all([[]])?",
           "options": ["True", "False", "Error", "None"],
           "answer": "False"
@@ -939,54 +890,55 @@
     let score = 0;
     let lives = 3;
     let xp = 0;
-    let level = 1;
-    let progressValue = 0;
-    let currentTopic = "level1";
-    let completedTopics = {};
+    let currentLevel = 1;
+    let streak = 0;
+    let correctCount = 0;
+    let wrongCount = 0;
+    let questionsAnswered = 0;
+    let currentQuestionIndex = 0;
+    
+    // Constants for level progression
+    const STREAK_TO_LEVEL_UP = 3;
+    const WRONG_TO_LEVEL_DOWN = 3;
+    const QUESTIONS_PER_LEVEL = 5;
     
     // Elements
     const questionEl = document.getElementById('question');
     const optionsEl = document.getElementById('options');
     const nextBtn = document.getElementById('next-btn');
     const progressBarEl = document.getElementById('progress-bar');
+    const scoreEl = document.querySelector('#score .stat-value');
     const xpEl = document.querySelector('#xp .stat-value');
     const livesEl = document.querySelector('#lives .stat-value');
     const levelNameEl = document.getElementById('level-name');
     const levelDescEl = document.getElementById('level-description');
-    const topicButtons = document.querySelectorAll('.topic');
+    const notificationEl = document.getElementById('notification');
+    const correctCountEl = document.getElementById('correct-count');
+    const wrongCountEl = document.getElementById('wrong-count');
+    const streakCountEl = document.getElementById('streak-count');
+    const questionNumberEl = document.getElementById('question-number');
     
     // Current question data
     let currentQuestion = null;
+    let currentLevelQuestions = [];
 
     // Level descriptions
     const levelInfo = {
       1: {name: "Python Basics", desc: "Learn the fundamental concepts of Python"},
       2: {name: "Data Structures", desc: "Learn about lists and basic operations"},
       3: {name: "Advanced Operations", desc: "Master more complex Python operations"},
-      4: {name: "Functions", desc: "Learn how to create and use functions"}
+      4: {name: "Expert Operations", desc: "Learn how to create and use functions"}
     };
 
-    // Topic selection
-    topicButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        topicButtons.forEach(b => b.classList.remove('active'));
-        
-        // Add active class to clicked button
-        btn.classList.add('active');
-        
-        // Set current topic
-        currentTopic = btn.dataset.topic;
-        
-        // Update level info based on topic
-        const levelNum = parseInt(currentTopic.replace('level', ''));
-        level = levelNum;
-        updateLevelInfo();
-        
-        // Load question from new topic
-        loadQuestion();
-      });
-    });
+    function showNotification(message, type) {
+      notificationEl.textContent = message;
+      notificationEl.className = `notification-${type}`;
+      notificationEl.classList.add('show');
+      
+      setTimeout(() => {
+        notificationEl.classList.remove('show');
+      }, 3000);
+    }
 
     function loseLife() {
       lives--;
@@ -1008,65 +960,116 @@
       xpEl.textContent = xp;
     }
 
+    function increaseScore(amount) {
+      score += amount;
+      scoreEl.textContent = score;
+    }
+
     function updateLevelInfo() {
-      const info = levelInfo[level];
-      levelNameEl.innerHTML = `${info.name} <span class="level-badge">Level ${level}</span>`;
+      const info = levelInfo[currentLevel];
+      levelNameEl.innerHTML = `${info.name} <span class="level-badge">Level ${currentLevel}</span>`;
       levelDescEl.textContent = info.desc;
     }
 
-    function showLessonComplete() {
-      // Only show completion for the first time completing a topic
-      if (completedTopics[currentTopic]) return;
+    function checkLevelProgression() {
+      // Check if we should level up
+      if (streak >= STREAK_TO_LEVEL_UP && currentLevel < 4) {
+        currentLevel++;
+        streak = 0;
+        showNotification(`Level up! You're now at Level ${currentLevel}`, 'levelup');
+        updateLevelInfo();
+        updateStats();
+        return true;
+      }
       
-      completedTopics[currentTopic] = true;
-      document.getElementById('lesson-complete').style.display = 'flex';
-      earnXP(10); // Bonus XP for completing a level
-    }
-
-    function closeCompletionModal() {
-      document.getElementById('lesson-complete').style.display = 'none';
+      // Check if we should level down
+      if (wrongCount >= WRONG_TO_LEVEL_DOWN && currentLevel > 1) {
+        currentLevel--;
+        wrongCount = 0;
+        showNotification(`You need more practice. Going back to Level ${currentLevel}`, 'leveldown');
+        updateLevelInfo();
+        updateStats();
+        return true;
+      }
+      
+      return false;
     }
 
     function updateProgressBar() {
-      progressValue = 100;
-      progressBarEl.style.width = `${progressValue}%`;
-      showLessonComplete();
+      const progress = (questionsAnswered % QUESTIONS_PER_LEVEL) / QUESTIONS_PER_LEVEL * 100;
+      progressBarEl.style.width = `${progress}%`;
+    }
+
+    function updateStats() {
+      correctCountEl.textContent = correctCount;
+      wrongCountEl.textContent = wrongCount;
+      streakCountEl.textContent = streak;
+    }
+
+    function prepareQuestionsForLevel() {
+      // Get all questions for current level
+      const allLevelQuestions = questions[`level${currentLevel}`];
+      
+      // Create a new shuffled set of questions for this level
+      currentLevelQuestions = [...allLevelQuestions]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, QUESTIONS_PER_LEVEL);
+      
+      currentQuestionIndex = 0;
     }
 
     function loadQuestion() {
-      currentQuestion = questions[currentTopic][0]; // Only one question per level
+      // If we've gone through all questions in the level, prepare new questions
+      if (currentQuestionIndex >= currentLevelQuestions.length) {
+        prepareQuestionsForLevel();
+      }
+      
+      // Get the current question
+      currentQuestion = currentLevelQuestions[currentQuestionIndex];
       questionEl.innerHTML = currentQuestion.question;
       optionsEl.innerHTML = '';
-      nextBtn.style.display = 'none';
-      progressBarEl.style.width = '0%';
-      progressValue = 0;
+      
+      // Update question counter
+      questionNumberEl.textContent = (currentQuestionIndex % QUESTIONS_PER_LEVEL) + 1;
       
       // Shuffle options for better learning
       const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
       
       shuffledOptions.forEach(option => {
         const btn = document.createElement('button');
-        btn.innerHTML = option;
+        btn.textContent = option;
         btn.className = 'option';
         btn.onclick = () => selectAnswer(btn, option);
         optionsEl.appendChild(btn);
       });
+      
+      updateProgressBar();
     }
 
     function selectAnswer(button, selected) {
       const correct = currentQuestion.answer;
       const allButtons = document.querySelectorAll('.option');
 
+      // Disable all buttons to prevent multiple selections
       allButtons.forEach(btn => btn.disabled = true);
 
+      questionsAnswered++;
+      
       if (selected === correct) {
+        // Correct answer
         button.classList.add('correct');
         button.innerHTML += '<span class="check">✓</span>';
         
+        // Update stats
+        correctCount++;
+        streak++;
+        wrongCount = Math.max(0, wrongCount - 1); // Reduce wrong count on correct answers
+        
         // Reward player
-        earnXP(5);
-        updateProgressBar();
+        earnXP(10);
+        increaseScore(5);
       } else {
+        // Wrong answer
         button.classList.add('incorrect');
         
         // Show which one was correct
@@ -1077,37 +1080,34 @@
           }
         });
         
+        // Update stats
+        wrongCount++;
+        streak = 0;
         loseLife();
       }
-
-      nextBtn.style.display = 'block';
+      
+      updateStats();
+      
+      // Check if we should change levels
+      const levelChanged = checkLevelProgression();
+      
+      // If level changed, we'll load a new set of questions for the new level
+      if (levelChanged) {
+        prepareQuestionsForLevel();
+      } else {
+        // Move to next question in current level
+        currentQuestionIndex++;
+      }
     }
 
     nextBtn.onclick = () => {
-      // Move to next level if available
-      const currentLevelNum = parseInt(currentTopic.replace('level', ''));
-      if (currentLevelNum < 4) {
-        const nextLevel = `level${currentLevelNum + 1}`;
-        
-        // Update UI to show next level
-        topicButtons.forEach(btn => {
-          btn.classList.remove('active');
-          if (btn.dataset.topic === nextLevel) {
-            btn.classList.add('active');
-          }
-        });
-        
-        // Set current topic to next level
-        currentTopic = nextLevel;
-        level = currentLevelNum + 1;
-        updateLevelInfo();
-      }
-      
       loadQuestion();
     };
 
     // Initial setup
     updateLevelInfo();
+    updateStats();
+    prepareQuestionsForLevel();
     loadQuestion();
   </script>
 </body>
