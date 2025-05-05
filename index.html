@@ -2,96 +2,390 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Adaptive Pop Quiz</title>
+  <title>Python Quest: Learn Python Step by Step</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+    
+    :root {
+      --primary: #58cc02;
+      --primary-hover: #46a302;
+      --secondary: #fff;
+      --wrong: #ff4b4b;
+      --correct: #58cc02;
+      --neutral: #e5e5e5;
+      --text: #3c3c3c;
+      --blue: #1cb0f6;
+      --hearts: #ff7272;
+      --xp: #ffc800;
+      --light-bg: #f7f7f7;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f4f8;
+      font-family: 'Nunito', sans-serif;
+      background: var(--light-bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      transition: background 0.5s ease;
+    }
+    
+    #top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 15px;
+      padding: 10px 0;
+    }
+    
+    .progress-container {
+      flex-grow: 1;
+      height: 15px;
+      background: var(--neutral);
+      border-radius: 10px;
+      margin: 0 15px;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 10px;
+    }
+    
+    .stats {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .stat {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+    }
+    
+    .stat-icon {
+      margin-right: 5px;
+      font-size: 20px;
+    }
+    
+    #lives {
+      color: var(--hearts);
+    }
+    
+    #xp {
+      color: var(--xp);
+    }
+    
+    #quiz-container {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      width: 500px;
+      max-width: 100%;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    #question-area {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: #f9fafc;
+    }
+    
+    #question {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    
+    #options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    
+    .option {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: var(--secondary);
+      border: 2px solid var(--neutral);
+      border-radius: 12px;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-align: left;
+      font-family: 'Nunito', sans-serif;
+      position: relative;
+    }
+    
+    .option:hover {
+      border-color: var(--blue);
+      background: #f0f8ff;
+    }
+    
+    .option:active {
+      transform: scale(0.98);
+    }
+    
+    .option.correct {
+      background: var(--correct) !important;
+      color: white;
+      border-color: var(--correct);
+    }
+    
+    .option.incorrect {
+      background: var(--wrong) !important;
+      color: white;
+      border-color: var(--wrong);
+    }
+    
+    .option .check {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      display: none;
+    }
+    
+    .option.correct .check {
+      display: inline;
+    }
+    
+    #next-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      font-family: 'Nunito', sans-serif;
+      box-shadow: 0 4px 0 var(--primary-hover);
+      margin-top: 15px;
+      display: none;
+    }
+    
+    #next-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+    
+    #next-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 var(--primary-hover);
+    }
+    
+    #level-info {
+      text-align: center;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 500px;
+      padding: 10px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    #level-name {
+      font-weight: 800;
+      color: var(--blue);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    #level-description {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .level-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+    
+    /* Topic selector */
+    #topic-selector {
+      display: flex;
+      width: 100%;
+      max-width: 500px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-bottom: 15px;
+      scrollbar-width: none;
+    }
+    
+    #topic-selector::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .topic {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: white;
+      border-radius: 20px;
+      margin-right: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .topic.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    #lesson-complete {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .lesson-complete-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 90%;
+      width: 400px;
+    }
+    
+    .xp-circle {
+      width: 120px;
+      height: 120px;
+      background: #fff4cc;
+      border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      margin: 0 auto 20px;
     }
-
-    #quiz-container {
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 400px;
-      max-width: 90%;
+    
+    .xp-text {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--xp);
     }
-
-    .option {
-      display: block;
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      background: #e0e7ff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .option:hover {
-      background: #c7d2fe;
-    }
-
-    .correct {
-      background-color: #a7f3d0 !important;
-    }
-
-    .incorrect {
-      background-color: #fecaca !important;
-    }
-
-    #feedback {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    #next-btn {
-      margin-top: 15px;
-      display: none;
-      padding: 0.5rem 1rem;
-      background-color: #6366f1;
+    
+    .continue-btn {
+      background: var(--primary);
       color: white;
       border: none;
-      border-radius: 5px;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-top: 20px;
       cursor: pointer;
+      box-shadow: 0 4px 0 var(--primary-hover);
     }
-
-    #next-btn:hover {
-      background-color: #4f46e5;
+    
+    .continue-btn:hover {
+      background: var(--primary-hover);
     }
-
-    #score {
-      margin-top: 1rem;
-      font-weight: bold;
+    
+    .continue-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 var(--primary-hover);
     }
-
-    #level {
-      margin-top: 0.5rem;
-      font-style: italic;
-      color: #666;
+    
+    .code-example {
+      background: #f0f3f8;
+      padding: 12px;
+      border-radius: 8px;
+      font-family: monospace;
+      margin: 10px 0;
+      white-space: pre-wrap;
     }
-  </style> 
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8418307699346608"
-      crossorigin="anonymous"></script>
+  </style>
 </head>
 <body>
+  <div id="top-bar">
+    <div class="stat" id="lives">
+      <span class="stat-icon">❤️</span>
+      <span class="stat-value">3</span>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="stat" id="xp">
+      <span class="stat-icon">⭐</span>
+      <span class="stat-value">0</span>
+    </div>
+  </div>
+  
+  <div id="level-info">
+    <div id="level-name">Python Basics <span class="level-badge">Level 1</span></div>
+    <div id="level-description">Learn the fundamental concepts of Python</div>
+  </div>
+  
+  <div id="topic-selector">
+    <div class="topic active" data-topic="level1">Level 1</div>
+    <div class="topic" data-topic="level2">Level 2</div>
+    <div class="topic" data-topic="level3">Level 3</div>
+    <div class="topic" data-topic="level4">Level 4</div>
+  </div>
 
   <div id="quiz-container">
-    <h2 id="question">Loading...</h2>
+    <div id="question-area">
+      <h2 id="question">Loading your question...</h2>
+    </div>
+    
     <div id="options"></div>
-    <div id="feedback"></div>
-    <button id="next-btn">Next</button>
-    <div id="score"></div>
-    <div id="level"></div>
+    <button id="next-btn">CONTINUE</button>
+  </div>
+  
+  <div id="lesson-complete">
+    <div class="lesson-complete-content">
+      <div class="xp-circle">
+        <div class="xp-text">+10</div>
+      </div>
+      <h2>Level Complete!</h2>
+      <p>You've completed this Python level</p>
+      <button class="continue-btn" onclick="closeCompletionModal()">CONTINUE</button>
+    </div>
   </div>
 
   <script>
     const questions = {
-      1: [
+      level1: [
         {
           "question": "What does the len() function return?",
           "options": ["The type of a variable", "The number of items in an object", "The last item of a list", "The largest value"],
@@ -298,7 +592,7 @@
           "answer": "All of the above"
         }
       ],
-      2: [
+      level2: [
         {
           "question": "What is the result of: all([0, 1, 2])?",
           "options": ["True", "False", "Error", "None"],
@@ -495,7 +789,7 @@
           "answer": "555"
         }
       ],
-      3: [
+      level3: [
         {
           "question": "What is the result of: all([[]])?",
           "options": ["True", "False", "Error", "None"],
@@ -567,7 +861,7 @@
           "answer": "6"
         }
       ],
-      4: [
+      level4: [
         {
           "question": "What is the output of the following code?\n\nx = [[0]*3]*3\nx[0][0] = 1\nprint(x)",
           "options": [
@@ -641,34 +935,118 @@
       ]
     };
 
+    // User progress tracking
     let score = 0;
-    let difficulty = 2; // Start at medium
-    let currentQuestion = null;
-
+    let lives = 3;
+    let xp = 0;
+    let level = 1;
+    let progressValue = 0;
+    let currentTopic = "level1";
+    let completedTopics = {};
+    
+    // Elements
     const questionEl = document.getElementById('question');
     const optionsEl = document.getElementById('options');
-    const feedbackEl = document.getElementById('feedback');
     const nextBtn = document.getElementById('next-btn');
-    const scoreEl = document.getElementById('score');
-    const levelEl = document.getElementById('level');
+    const progressBarEl = document.getElementById('progress-bar');
+    const xpEl = document.querySelector('#xp .stat-value');
+    const livesEl = document.querySelector('#lives .stat-value');
+    const levelNameEl = document.getElementById('level-name');
+    const levelDescEl = document.getElementById('level-description');
+    const topicButtons = document.querySelectorAll('.topic');
+    
+    // Current question data
+    let currentQuestion = null;
 
-    function getRandomQuestion(level) {
-      const pool = questions[level];
-      return pool[Math.floor(Math.random() * pool.length)];
+    // Level descriptions
+    const levelInfo = {
+      1: {name: "Python Basics", desc: "Learn the fundamental concepts of Python"},
+      2: {name: "Data Structures", desc: "Learn about lists and basic operations"},
+      3: {name: "Advanced Operations", desc: "Master more complex Python operations"},
+      4: {name: "Functions", desc: "Learn how to create and use functions"}
+    };
+
+    // Topic selection
+    topicButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        topicButtons.forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        // Set current topic
+        currentTopic = btn.dataset.topic;
+        
+        // Update level info based on topic
+        const levelNum = parseInt(currentTopic.replace('level', ''));
+        level = levelNum;
+        updateLevelInfo();
+        
+        // Load question from new topic
+        loadQuestion();
+      });
+    });
+
+    function loseLife() {
+      lives--;
+      if (lives < 0) lives = 0;
+      livesEl.textContent = lives;
+      
+      // If out of lives, reset
+      if (lives === 0) {
+        setTimeout(() => {
+          alert("You've run out of hearts! Let's give you more to continue learning.");
+          lives = 3;
+          livesEl.textContent = lives;
+        }, 500);
+      }
+    }
+
+    function earnXP(amount) {
+      xp += amount;
+      xpEl.textContent = xp;
+    }
+
+    function updateLevelInfo() {
+      const info = levelInfo[level];
+      levelNameEl.innerHTML = `${info.name} <span class="level-badge">Level ${level}</span>`;
+      levelDescEl.textContent = info.desc;
+    }
+
+    function showLessonComplete() {
+      // Only show completion for the first time completing a topic
+      if (completedTopics[currentTopic]) return;
+      
+      completedTopics[currentTopic] = true;
+      document.getElementById('lesson-complete').style.display = 'flex';
+      earnXP(10); // Bonus XP for completing a level
+    }
+
+    function closeCompletionModal() {
+      document.getElementById('lesson-complete').style.display = 'none';
+    }
+
+    function updateProgressBar() {
+      progressValue = 100;
+      progressBarEl.style.width = `${progressValue}%`;
+      showLessonComplete();
     }
 
     function loadQuestion() {
-      currentQuestion = getRandomQuestion(difficulty);
-      questionEl.textContent = currentQuestion.question;
+      currentQuestion = questions[currentTopic][0]; // Only one question per level
+      questionEl.innerHTML = currentQuestion.question;
       optionsEl.innerHTML = '';
-      feedbackEl.textContent = '';
       nextBtn.style.display = 'none';
-      scoreEl.textContent = `Score: ${score}`;
-      levelEl.textContent = `Difficulty Level: ${difficulty}`;
-
-      currentQuestion.options.forEach(option => {
+      progressBarEl.style.width = '0%';
+      progressValue = 0;
+      
+      // Shuffle options for better learning
+      const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+      
+      shuffledOptions.forEach(option => {
         const btn = document.createElement('button');
-        btn.textContent = option;
+        btn.innerHTML = option;
         btn.className = 'option';
         btn.onclick = () => selectAnswer(btn, option);
         optionsEl.appendChild(btn);
@@ -683,22 +1061,53 @@
 
       if (selected === correct) {
         button.classList.add('correct');
-        feedbackEl.textContent = "✅ Correct!";
-        score++;
-        if (difficulty < 4) difficulty++; // move up
+        button.innerHTML += '<span class="check">✓</span>';
+        
+        // Reward player
+        earnXP(5);
+        updateProgressBar();
       } else {
         button.classList.add('incorrect');
-        feedbackEl.textContent = `❌ Incorrect. Correct answer: ${correct}`;
-        if (difficulty > 1) difficulty--; // move down
+        
+        // Show which one was correct
+        allButtons.forEach(btn => {
+          if (btn.textContent === correct) {
+            btn.classList.add('correct');
+            btn.innerHTML += '<span class="check">✓</span>';
+          }
+        });
+        
+        loseLife();
       }
 
-      nextBtn.style.display = 'inline-block';
+      nextBtn.style.display = 'block';
     }
 
     nextBtn.onclick = () => {
+      // Move to next level if available
+      const currentLevelNum = parseInt(currentTopic.replace('level', ''));
+      if (currentLevelNum < 4) {
+        const nextLevel = `level${currentLevelNum + 1}`;
+        
+        // Update UI to show next level
+        topicButtons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.dataset.topic === nextLevel) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Set current topic to next level
+        currentTopic = nextLevel;
+        level = currentLevelNum + 1;
+        updateLevelInfo();
+      }
+      
       loadQuestion();
     };
 
+    // Initial setup
+    updateLevelInfo();
     loadQuestion();
   </script>
 </body>
