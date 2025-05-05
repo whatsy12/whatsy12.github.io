@@ -93,70 +93,550 @@
     const questions = {
       1: [
         {
-          question: "What is the correct way to get user input in Python?",
-          options: ["input()", "read()", "get()", "scanf()"],
-          answer: "input()"
+          "question": "What does the len() function return?",
+          "options": ["The type of a variable", "The number of items in an object", "The last item of a list", "The largest value"],
+          "answer": "The number of items in an object"
         },
         {
-          question: "Which line prints a variable `name`?",
-          options: ["print name", "echo(name)", "print(name)", "printf(name)"],
-          answer: "print(name)"
+          "question": "Which function returns the largest item from an iterable?",
+          "options": ["min()", "sum()", "max()", "top()"],
+          "answer": "max()"
         },
         {
-          question: "What is the output of:\n\nprint(\"Hello\" + \"World\")",
-          options: ["HelloWorld", "Hello World", "Hello+World", "Error"],
-          answer: "HelloWorld"
+          "question": "Which function returns the smallest item from an iterable?",
+          "options": ["min()", "lowest()", "smallest()", "reduce()"],
+          "answer": "min()"
+        },
+        {
+          "question": "Which function returns the total of all items in a list of numbers?",
+          "options": ["sum()", "total()", "add()", "combine()"],
+          "answer": "sum()"
+        },
+        {
+          "question": "What does the all() function return?",
+          "options": ["True if any element is true", "True if all elements are true", "Sum of all elements", "List of all elements"],
+          "answer": "True if all elements are true"
+        },
+        {
+          "question": "What does the any() function return?",
+          "options": ["True if all elements are true", "True if any element is true", "List of all true elements", "False if list is empty"],
+          "answer": "True if any element is true"
+        },
+        {
+          "question": "What does the reversed() function return?",
+          "options": ["A sorted version of the list", "A reversed copy of the list", "The last element", "An iterator object"],
+          "answer": "An iterator object"
+        },
+        {
+          "question": "Select the output for this code: print(list(range(5)))",
+          "options": ["[0, 1, 2, 3, 4]", "[1, 2, 3, 4, 5]", "[0, 1, 2, 3, 4, 5]", "[5, 4, 3, 2, 1]"],
+          "answer": "[0, 1, 2, 3, 4]"
+        },
+        {
+          "question": "What does sorted([3, 1, 2]) return?",
+          "options": ["[1, 2, 3]", "[3, 1, 2]", "[3, 2, 1]", "An iterator that can be changed into a list"],
+          "answer": "[1, 2, 3]"
+        },
+        {
+          "question": "What is the purpose of the zip() function?",
+          "options": ["Combine two lists element-wise", "Sort a list", "Compress a file", "Split a string"],
+          "answer": "Combine two lists element-wise"
+        },
+        {
+          "question": "What is the keyword used to start a loop in Python?",
+          "options": ["loop", "repeat", "for", "iterate"],
+          "answer": "for"
+        },
+        {
+          "question": "What does type(5) return?",
+          "options": ["'int'", "'float'", "'str'", "'bool'"],
+          "answer": "'int'"
+        },
+        {
+          "question": "Which of these is a Python datatype?",
+          "options": ["number", "character", "list", "letter"],
+          "answer": "list"
+        },
+        {
+          "question": "How do you define a list in Python?",
+          "options": ["{}", "()", "[]", "<>"],
+          "answer": "[]"
+        },
+        {
+          "question": "What is a double list?",
+          "options": ["A list with duplicate values", "A list of lists", "A list multiplied by 2", "A sorted list"],
+          "answer": "A list of lists"
+        },
+        {
+          "question": "Which of these is a string in Python?",
+          "options": ["123", "'hello'", "True", "False"],
+          "answer": "'hello'"
+        },
+        {
+          "question": "How do you take input from the user in Python?",
+          "options": ["scan()", "input()", "get()", "read()"],
+          "answer": "input()"
+        },
+        {
+          "question": "What does print('Hello') do?",
+          "options": ["Returns Hello", "Prints Hello to console", "Stores Hello", "Saves Hello to a file"],
+          "answer": "Prints Hello to console"
+        },
+        {
+          "question": "Which function gives the number of characters in a string?",
+          "options": ["count()", "charcount()", "len()", "strcount()"],
+          "answer": "len()"
+        },
+        {
+          "question": "Which of the following loops through a list?",
+          "options": ["for item in list:", "loop item in list:", "iterate list for item:", "item in list.for():"],
+          "answer": "for item in list:"
+        },
+        {
+          "question": "What will len([1, 2, [3, 4]]) return?",
+          "options": ["4", "3", "2", "5"],
+          "answer": "3"
+        },
+        {
+          "question": "What is the output of sum([1, 2, 3])?",
+          "options": ["6", "123", "1", "Error"],
+          "answer": "6"
+        },
+        {
+          "question": "Which function will sort a list in descending order?",
+          "options": ["sorted(l, reverse=True)", "sorted(l, reverse=False)", "reversed(sorted(l))", "sort_desc(l)"],
+          "answer": "sort(l, reverse=True)"
+        },
+        {
+          "question": "How do you join two lists element-wise in Python?",
+          "options": ["merge()", "zip()", "join()", "combine()"],
+          "answer": "zip()"
+        },
+        {
+          "question": "What does type('123') return?",
+          "options": ["int", "float", "str", "list"],
+          "answer": "str"
+        },
+        {
+          "question": "Which of the following is a list?",
+          "options": ["(1, 2, 3)", "[1, 2, 3]", "'1, 2, 3'", "{1, 2, 3}"],
+          "answer": "[1, 2, 3]"
+        },
+        {
+          "question": "How do you access the second item in a list 'my_list'?",
+          "options": ["my_list[1]", "my_list(2)", "my_list{1}", "my_list.2"],
+          "answer": "my_list[1]"
+        },
+        {
+          "question": "What is the output of max([3, 6, 1])?",
+          "options": ["3", "6", "1", "Error"],
+          "answer": "6"
+        },
+        {
+          "question": "What is the result of any([False, True, False])?",
+          "options": ["False", "True", "None", "Error"],
+          "answer": "True"
+        },
+        {
+          "question": "What is the result of all([True, True, False])?",
+          "options": ["True", "False", "None", "Error"],
+          "answer": "False"
+        },
+        {
+          "question": "How do you define a tuple in Python?",
+          "options": ["[]", "()", "{}", "<>"],
+          "answer": "()"
+        },
+        {
+          "question": "What does range(3) return?",
+          "options": ["[1, 2, 3]", "[0, 1, 2]", "[0, 1, 2, 3]", "None of the answers"],
+          "answer": "None of the answers"
+        },
+        {
+          "question": "How do you convert a string '123' to an integer?",
+          "options": ["str('123')", "int('123')", "float('123')", "eval('123')"],
+          "answer": "int('123')"
+        },
+        {
+          "question": "What is the result of reversed([1, 2, 3])?",
+          "options": ["[3, 2, 1]", "reversed object", "Error", "None"],
+          "answer": "reversed object"
+        },
+        {
+          "question": "Which method would you use to get the last character of a string?",
+          "options": ["str[-1]", "str[len(str)]", "str.last()", "str.end()"],
+          "answer": "str[-1]"
+        },
+        {
+          "question": "Which function helps you identify the data type of a value?",
+          "options": ["what()", "typeof()", "type()", "gettype()"],
+          "answer": "type()"
+        },
+        {
+          "question": "What is the result of 'hello' + 'world'?",
+          "options": ["'helloworld'", "'hello world'", "'hello+world'", "Error"],
+          "answer": "'helloworld'"
+        },
+        {
+          "question": "What is a correct way to loop through a list called 'items'?",
+          "options": ["for i in items", "foreach i in items", "loop items", "items.forEach()"],
+          "answer": "for i in items"
+        },
+        {
+          "question": "How do you print each element in a list on a new line?",
+          "options": [
+            "print(list)",
+            "for i in list: print(i)",
+            "print(*list)",
+            "print(list, sep='\\n')"
+          ],
+          "answer": "for i in list: print(i)"
+        },
+        {
+          "question": "Which of the following creates a list with numbers 0 to 4?",
+          "options": ["sorted(1, 2, 4, 0, 3)", "[0, 1, 2, 3, 4]", "list(range(5))", "All of the above"],
+          "answer": "All of the above"
         }
       ],
       2: [
         {
-          question: "What is the output of:\n\nlen([1, 2, 3])",
-          options: ["2", "3", "4", "Error"],
-          answer: "3"
+          "question": "What is the result of: all([0, 1, 2])?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False"
         },
         {
-          question: "Which function adds an item to a list?",
-          options: ["push()", "add()", "append()", "insert()"],
-          answer: "append()"
+          "question": "Which of the following will NOT cause a TypeError?",
+          "options": ["sum([1, 2, '3'])", "'5' + 5", "'a' * 3", "max([1, '2'])"],
+          "answer": "'a' * 3"
         },
         {
-          question: "How do you access the first item in a list `nums = [10, 20, 30]`?",
-          options: ["nums[0]", "nums(0)", "nums{1}", "nums[1]"],
-          answer: "nums[0]"
+          "question": "What is the output of len([[]])?",
+          "options": ["0", "1", "2", "Error"],
+          "answer": "1"
+        },
+        {
+          "question": "Which of the following expressions is valid?",
+          "options": ["sum(reversed([1, 2]))", "sorted(reversed([1, '2']))", "len(reversed([1, 2]))", "reversed([1, 2])[1]"],
+          "answer": "list(reversed([1, 2]))[0]"
+        },
+        {
+          "question": "What is the output of sorted(['100', '2', '10'])?",
+          "options": ["['2', '10', '100']", "['10', '100', '2']", "['100', '10', '2']", "['10', '2', '100']"],
+          "answer": "['10', '100', '2']"
+        },
+        {
+          "question": "What does list(zip([[1, 2], [3, 4]])) return?",
+          "options": ["[(1, 3), (2, 4)]", "[([1, 3]), ([2, 4])]", "[([1, 2]), ([3, 4])]", "[([1, 2],), ([3, 4],)]"],
+          "answer": "[([1, 2],), ([3, 4],)]"
+        },
+        {
+          "question": "What is the output of sum([])?",
+          "options": ["0", "None", "Error", "False"],
+          "answer": "0"
+        },
+        {
+          "question": "What does this return: any([[], '', 0])?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False"
+        },
+        {
+          "question": "What is the output of: len('hello\nworld')?",
+          "options": ["10", "11", "9", "12"],
+          "answer": "11"
+        },
+        {
+          "question": "What is the result of: max([])?",
+          "options": ["None", "0", "Error", "[]"],
+          "answer": "Error"
+        },
+        {
+          "question": "Which line of code creates a list of 5 elements, all 0?",
+          "options": ["[0] * 5", "[0 for _ in range(5)]", "list(0 * 5)", "Both A and B"],
+          "answer": "[0] * 5"
+        },
+        {
+          "question": "What will print(type(type(5))) output?",
+          "options": ["<class 'type'>", "<type 'int'>", "<class 'int'>", "<type 'type'>"],
+          "answer": "<class 'type'>"
+        },
+        {
+          "question": "How many iterations does this run: for i in range(1, 10, 2)?",
+          "options": ["10", "5", "9", "4"],
+          "answer": "5"
+        },
+        {
+          "question": "What will this return: list(range(5, 1, -1))?",
+          "options": ["[5, 4, 3, 2, 1]", "[1, 2, 3, 4, 5]", "[5, 4, 3, 2]", "[5, 4, 3, 2, 1, 0]"],
+          "answer": "[5, 4, 3, 2]"
+        },
+        {
+          "question": "Which of these will give the correct number of elements in a 2D list?",
+          "options": ["len(list)", "len(list[0])", "sum(len(row) for row in list)", "len(list) * len(list[0])"],
+          "answer": "sum(len(row) for row in list)"
+        },
+        {
+          "question": "What is the output of list(zip(range(3), range(100)))?",
+          "options": ["[(0,0), (1,1), ..., (99,99)]", "Error", "[(0, 0), (1, 1), (2, 2)]", "[range(3), range(100)]"],
+          "answer": "[(0, 0), (1, 1), (2, 2)]"
+        },
+        {
+          "question": "What will sorted([True, False, True]) return?",
+          "options": ["[False, True, True]", "[True, False, True]", "Error", "[0, 1, 1]"],
+          "answer": "[False, True, True]"
+        },
+        {
+          "question": "What is the result of: list(zip('abc', [1, 2]))?",
+          "options": ["[('a', 1), ('b', 2)]", "[('a', 1), ('b', 2), ('c', None)]", "Error", "[('a', 1), ('b', 2), ('c', '')]"],
+          "answer": "[('a', 1), ('b', 2)]"
+        },
+        {
+          "question": "What is returned by sum([True, False, True])?",
+          "options": ["2", "1", "3", "Error"],
+          "answer": "2"
+        },
+        {
+          "question": "Which will throw an error?",
+          "options": ["max([])", "sum([])", "min([1])", "all([False])"],
+          "answer": "max([])"
+        },
+        {
+          "question": "What is len(' ')?",
+          "options": ["0", "1", "2", "Error"],
+          "answer": "1"
+        },
+        {
+          "question": "홍승기는 잘생겼다",
+          "options": ["YES'", "YES", "YES", "YES"],
+          "answer": "YES"
+        },
+        {
+          "question": "Which of the following are valid Python types?",
+          "options": ["int, list, str", "integer, array, string", "float, zip", "Both A and C"],
+          "answer": "Both A and C"
+        },
+        {
+          "question": "What does type(len) return?",
+          "options": ["function", "builtin_function_or_method", "method", "type"],
+          "answer": "builtin_function_or_method"
+        },
+        {
+          "question": "What is the result of list('1234')[-2]?",
+          "options": ["'3'", "'2'", "3", "Error"],
+          "answer": "'3'"
+        },
+        {
+          "question": "What does this return: [i for i in range(5) if i%2==0]?",
+          "options": ["[1, 3, 5]", "[0, 1, 2, 3, 4]", "[0, 2, 4]", "[2, 4]"],
+          "answer": "[0, 2, 4]"
+        },
+        {
+          "question": "What is the type of the object returned by input()?",
+          "options": ["str", "int", "depends on input", "None"],
+          "answer": "str"
+        },
+        {
+          "question": "Which of these would raise an error?",
+          "options": ["int('10')", "int('10.0')", "float('10')", "str(10.5)"],
+          "answer": "int('10.0')"
+        },
+        {
+          "question": "What does list('') return?",
+          "options": ["['']", "[]", "None", "Error"],
+          "answer": "[]"
+        },
+        {
+          "question": "Which function flattens a 2D list into 1D?",
+          "options": [
+            "[x for row in mat for x in row]",
+            "sum(mat)",
+            "mat.flatten()",
+            "list(mat)"
+          ],
+          "answer": "[x for row in mat for x in row]"
+        },
+        {
+          "question": "What is the result of type(zip([1], [2]))?",
+          "options": ["zip", "list", "<class 'zip'>", "<class 'list'>"],
+          "answer": "<class 'zip'>"
+        },
+        {
+          "question": "What does range(5) == [0,1,2,3,4] return?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False"
+        },
+        {
+          "question": "What's wrong with this code? _ar = (1, 2, 3)",
+          "options": ["Cannot store int in tuple", "Cannot make tuple name start with _", "Both A and B", "There is no problem in the code"],
+          "answer": "There is no problem in the code"
+        },
+        {
+          "question": "What's wrong with this code? _ar = [1, 2, 3]",
+          "options": ["Cannot store int in list", "Cannot make list name start with _", "Both A and B", "There is no problem in the code"],
+          "answer": "There is no problem in the code"
+        },
+        {
+          "question": "What is returned by len(range(10, 0, -2))?",
+          "options": ["5", "10", "4", "6"],
+          "answer": "5"
+        },
+        {
+          "question": "What does type(reversed([1, 2, 3])) return?",
+          "options": ["class 'list'>", "<class 'iterator'>", "<class 'list_reverseiterator'>", "None"],
+          "answer": "<class 'list_reverseiterator'>"
+        },
+        {
+          "question": "Which would raise an error: min('abc', 2)?",
+          "options": ["Yes", "No", "Depends on Python version", "Returns 'a'"],
+          "answer": "Yes"
+        },
+        {
+          "question": "What does print('5' * 3) output?",
+          "options": ["555", "15", "'555'", "Error"],
+          "answer": "555"
         }
       ],
       3: [
         {
-          question: "What is the output of:\n\nprint(bool([]))",
-          options: ["True", "False", "None", "Error"],
-          answer: "False"
+          "question": "What is the result of: all([[]])?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False"
         },
         {
-          question: "What will this output?\n\nx = [1, 2, 3]\nprint(x * 2)",
-          options: ["[2, 4, 6]", "[1, 2, 3, 1, 2, 3]", "[2, 2, 2]", "Error"],
-          answer: "[1, 2, 3, 1, 2, 3]"
+          "question": "Given: x = [1, 2]; y = x; y.append(3). What is x now?",
+          "options": ["[1, 2]", "[1, 2, 3]", "[3]", "[]"],
+          "answer": "[1, 2, 3]"
         },
         {
-          question: "What happens if you use `list.remove(5)` when 5 is not in the list?",
-          options: ["Does nothing", "Removes the last item", "Raises an error", "Returns None"],
-          answer: "Raises an error"
+          "question": "What is the output of: len(''.join(['a', 'b']) + 'cd')?",
+          "options": ["2", "3", "4", "5"],
+          "answer": "4"
+        },
+        {
+          "question": "What does list(zip(*[[1, 2, 3], [4, 5, 6]])) produce?",
+          "options": [
+            "[(1, 2, 3), (4, 5, 6)]",
+            "[(1, 4), (2, 5), (3, 6)]",
+            "[(1, 2), (3, 4), (5, 6)]",
+            "[[1, 2, 3], [4, 5, 6]]"
+          ],
+          "answer": "[(1, 4), (2, 5), (3, 6)]"
+        },
+        {
+          "question": "Which expression returns the number of non-empty sublists in [[1], [], [0], []]?",
+          "options": [
+            "len([x for x in lst if x])",
+            "sum([bool(x) for x in lst])",
+            "all(lst)",
+            "Both A and B"
+          ],
+          "answer": "Both A and B"
+        },
+        {
+          "question": "What does reversed(range(3)) == reversed([0, 1, 2]) return?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False"
+        },
+        {
+          "question": "Which of these expressions creates a list of individual characters from 'abc'?",
+          "options": [
+            "list('abc')",
+            "[*'abc']",
+            "[char for char in 'abc']",
+            "All of the above"
+          ],
+          "answer": "All of the above"
+        },
+        {
+          "question": "What is the result of: len([list(range(3))] * 2)?",
+          "options": ["3", "6", "2", "1"],
+          "answer": "2"
+        },
+        {
+          "question": "Given x = [[0]*2]*2; x[0][0] = 1. What is x now?",
+          "options": [
+            "[[1, 0], [0, 0]]",
+            "[[1, 0], [1, 0]]",
+            "[[1], [0]]",
+            "[[1, 1], [1, 1]]"
+          ],
+          "answer": "[[1, 0], [1, 0]]"
+        },
+        {
+          "question": "What is the output of sum([i for i in range(5) if i % 2 == 0])?",
+          "options": ["6", "4", "10", "0"],
+          "answer": "6"
         }
       ],
       4: [
         {
-          question: "What does this function do?\n\ndef count_up(n):\n    for i in range(1, n+1):\n        print(i)",
-          options: ["Prints 1 to n", "Prints 0 to n", "Prints n times", "Error"],
-          answer: "Prints 1 to n"
+          "question": "What is the output of the following code?\n\nx = [[0]*3]*3\nx[0][0] = 1\nprint(x)",
+          "options": [
+            "[[1, 0, 0], [0, 0, 0], [0, 0, 0]]",
+            "[[1, 0, 0], [1, 0, 0], [1, 0, 0]]",
+            "[[1, 1, 1], [0, 0, 0], [0, 0, 0]]",
+            "[[1, 0, 0]] * 3"
+          ],
+          "answer": "[[1, 0, 0], [1, 0, 0], [1, 0, 0]]"
         },
         {
-          question: "How many times will this loop run?\n\nfor i in range(2, 10, 2):\n    print(i)",
-          options: ["4", "5", "6", "8"],
-          answer: "4"
+          "question": "What does this print?\n\nprint(sum(map(len, zip(*[['a', 'b'], ['c']]))))",
+          "options": ["2", "1", "3", "Error"],
+          "answer": "2"
         },
         {
-          question: "What is the output?\n\ndef repeat(word):\n    return word * 2\n\nprint(repeat('hi'))",
-          options: ["hi", "hihi", "hi hi", "Error"],
-          answer: "hihi"
+          "question": "What does this print?\n\nprint(any(['', [], {}, 0, False, 'False']))",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "True"
+        },
+        {
+          "question": "What is the output of:\n\nprint(len([i for i in range(1000) if str(i) == str(i)[::-1]]))",
+          "options": ["100", "109", "199", "None of the above"],
+          "answer": "109"
+        },
+        {
+          "question": "What does this return?\n\nlist(reversed(reversed([1, 2, 3]))) == [1, 2, 3]",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "True"
+        },
+        {
+          "question": "Given: a = [[], [], []]; print(len(set(map(tuple, a))))",
+          "options": ["3", "1", "0", "Error"],
+          "answer": "1"
+        },
+        {
+          "question": "Which of these are true about `zip`?\n\list(nzip(range(3), range(5)))",
+          "options": [
+            "Returns 5 pairs, missing elements filled with None",
+            "Returns a zip object that produces 3 pairs",
+            "Throws an error due to uneven lengths",
+            "Returns [(0,0), (1,1), (2,2), (None, 3), (None, 4)]"
+          ],
+          "answer": "Returns a zip object that produces 3 pairs"
+        },
+        {
+          "question": "What is printed?\n\nprint(sorted(['10', '2', '1'], key=int))",
+          "options": [
+            "['1', '2', '10']",
+            "['10', '2', '1']",
+            "['1', '10', '2']",
+            "['2', '10', '1']"
+          ],
+          "answer": "['1', '2', '10']"
+        },
+        {
+          "question": "What is the output of:\n\nsum([[1, 2], [3, 4]], [])",
+          "options": ["[1, 2, 3, 4]", "[[1, 2], [3, 4]]", "10", "Error"],
+          "answer": "[1, 2, 3, 4]"
+        },
+        {
+          "question": "What does this code print?\n\nx = [1, 2]; y = x[:]; y[0] = 0; print(x)",
+          "options": [
+            "[0, 2]",
+            "[1, 2]",
+            "[0, 1, 2]",
+            "Error"
+          ],
+          "answer": "[1, 2]"
         }
       ]
     };
