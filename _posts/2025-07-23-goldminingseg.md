@@ -1,5 +1,5 @@
 ---
-## title: "금광 세그 튜토리얼"
+title: "금광 세그 튜토리얼"
 date: 2024-07-23 11:47:53
 categories: Algorithm
 
