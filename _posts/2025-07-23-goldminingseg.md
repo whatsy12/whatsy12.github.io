@@ -101,5 +101,3 @@ int main(void) {
         cout << res._max << "\n";
     }
 }
-
-​```
