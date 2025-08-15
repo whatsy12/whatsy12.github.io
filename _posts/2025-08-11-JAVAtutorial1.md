@@ -37,6 +37,7 @@ System.out.print()은 소괄호 안의 값을 출력하고 줄바꿈을 하지 �
 System.out.println()은 소괄호 안의 값을 출력하고 줄바꿈을 한다.
 
 예를 들어 보겠다.
+
 코드:
 ```
 public class Main {
@@ -55,6 +56,7 @@ Hello world!
 ```
 
 또, 소괄호 안에 사칙연산(+, -, *, /)을 하는 것이 가능하다.
+
 코드:
 ```
 public class Main {
