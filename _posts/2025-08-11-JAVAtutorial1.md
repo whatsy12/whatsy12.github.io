@@ -9,6 +9,7 @@ tags:
 
 # Intellij 다운로드
 https://www.jetbrains.com/idea/download/?section=windows
+
 위 링크를 통해 Intellij community edition을 다운받는다. (페이지 아래로 스크롤하면 있어요!)
 인터넷에 검색하면 사용법이 많이 알려져 있으니, 이 글에서는 사용법을 생략한다.
 
