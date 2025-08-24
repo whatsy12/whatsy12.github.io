@@ -8,7 +8,6 @@ tags:
 - Project
 - English
 ---
-
 # Base idea
 <img width="400" height="650" alt="image" src="https://github.com/user-attachments/assets/4a138565-0efb-4983-adcb-cb298b463279" />
 
