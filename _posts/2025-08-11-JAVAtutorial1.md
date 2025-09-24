@@ -1,5 +1,5 @@
 ---
-title: "학교 Java 시험 벼락치기 튜토리얼"
+title: "학교 Java 시험 벼락치기 튜토리얼 (1)"
 date: 2025-08-11 13:01:36
 categories:
 - Tutorial
