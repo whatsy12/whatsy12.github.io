@@ -215,7 +215,375 @@ int million = 1_000_000;
 
 -----
 
-이제 Java의 기본 문법을 이해했다면, 다음 단계로 입력 받기, 조건문, 반복문 등을 배울 준비가 되었다!
+# 입력 받기
+
+지금까지는 정보를 출력하는 방법을 배웠다. 이제는 사용자로부터 정보를 입력받는 방법을 알아보겠다.
+
+Java에서 입력을 받으려면 `Scanner`라는 클래스를 사용해야 한다. 먼저 코드 맨 위에 다음과 같이 작성한다.
+
+```java
+import java.util.Scanner;
+```
+
+그 다음, `main` 메소드 안에서 Scanner 객체를 생성한다.
+
+```java
+Scanner sc = new Scanner(System.in);
+```
+
+## 입력 받기의 기본
+
+Scanner를 사용하면 다양한 타입의 데이터를 입력받을 수 있다.
+
+- `sc.nextInt()` : 정수 입력받기
+- `sc.nextLong()` : long 타입 정수 입력받기
+- `sc.nextFloat()` : float 타입 실수 입력받기
+- `sc.nextDouble()` : double 타입 실수 입력받기
+- `sc.next()` : 공백 전까지의 문자열 입력받기
+- `sc.nextLine()` : 한 줄 전체를 문자열로 입력받기
+
+예시 코드:
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("정수를 입력하세요: ");
+        int num = sc.nextInt();
+        System.out.println("입력한 정수: " + num);
+        
+        System.out.print("이름을 입력하세요: ");
+        String name = sc.next();
+        System.out.println("안녕하세요, " + name + "님!");
+    }
+}
+```
+
+출력 예시:
+
+```
+정수를 입력하세요: 10
+입력한 정수: 10
+이름을 입력하세요: 홍길동
+안녕하세요, 홍길동님!
+```
+
+## 주의사항
+
+`nextLine()`을 사용할 때는 주의가 필요하다. 다른 next 메소드들을 사용한 후에 `nextLine()`을 사용하면, 남아있는 개행문자(\n)를 읽어버려 빈 문자열이 입력될 수 있다.
+
+예시:
+
+```java
+Scanner sc = new Scanner(System.in);
+int num = sc.nextInt();
+sc.nextLine(); // 버퍼에 남은 개행문자 제거
+String str = sc.nextLine();
+```
+
+# 조건문 (if문)
+
+프로그래밍을 하다 보면 특정 조건에 따라 다른 동작을 해야 하는 경우가 많다. 이럴 때 사용하는 것이 조건문이다.
+
+## if문의 기본 구조
+
+```java
+if (조건) {
+    // 조건이 참일 때 실행되는 코드
+}
+```
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int score = 85;
+        
+        if (score >= 80) {
+            System.out.println("합격입니다!");
+        }
+    }
+}
+```
+
+출력:
+
+```
+합격입니다!
+```
+
+## if-else문
+
+```java
+if (조건) {
+    // 조건이 참일 때 실행
+} else {
+    // 조건이 거짓일 때 실행
+}
+```
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int age = 15;
+        
+        if (age >= 18) {
+            System.out.println("성인입니다.");
+        } else {
+            System.out.println("미성년자입니다.");
+        }
+    }
+}
+```
+
+출력:
+
+```
+미성년자입니다.
+```
+
+## if-else if-else문
+
+여러 조건을 검사해야 할 때 사용한다.
+
+```java
+if (조건1) {
+    // 조건1이 참일 때
+} else if (조건2) {
+    // 조건2가 참일 때
+} else if (조건3) {
+    // 조건3이 참일 때
+} else {
+    // 모든 조건이 거짓일 때
+}
+```
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int score = 85;
+        
+        if (score >= 90) {
+            System.out.println("A학점");
+        } else if (score >= 80) {
+            System.out.println("B학점");
+        } else if (score >= 70) {
+            System.out.println("C학점");
+        } else {
+            System.out.println("F학점");
+        }
+    }
+}
+```
+
+출력:
+
+```
+B학점
+```
+
+## 비교 연산자
+
+조건문에서 사용되는 주요 비교 연산자들:
+
+- `==` : 같다
+- `!=` : 같지 않다
+- `>` : 크다
+- `<` : 작다
+- `>=` : 크거나 같다
+- `<=` : 작거나 같다
+
+## 논리 연산자
+
+여러 조건을 조합할 때 사용:
+
+- `&&` : AND (그리고) - 모든 조건이 참이어야 함
+- `||` : OR (또는) - 하나라도 참이면 됨
+- `!` : NOT (부정) - 참을 거짓으로, 거짓을 참으로
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int age = 20;
+        boolean hasLicense = true;
+        
+        if (age >= 18 && hasLicense) {
+            System.out.println("운전할 수 있습니다.");
+        } else {
+            System.out.println("운전할 수 없습니다.");
+        }
+    }
+}
+```
+
+출력:
+
+```
+운전할 수 있습니다.
+```
+
+# 반복문
+
+같은 작업을 여러 번 반복해야 할 때 반복문을 사용한다.
+
+## for문
+
+정해진 횟수만큼 반복할 때 주로 사용한다.
+
+```java
+for (초기식; 조건식; 증감식) {
+    // 반복할 코드
+}
+```
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i + "번째 반복");
+        }
+    }
+}
+```
+
+출력:
+
+```
+1번째 반복
+2번째 반복
+3번째 반복
+4번째 반복
+5번째 반복
+```
+
+## while문
+
+조건이 참인 동안 계속 반복한다.
+
+```java
+while (조건) {
+    // 반복할 코드
+}
+```
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int count = 1;
+        
+        while (count <= 5) {
+            System.out.println("카운트: " + count);
+            count++;
+        }
+    }
+}
+```
+
+출력:
+
+```
+카운트: 1
+카운트: 2
+카운트: 3
+카운트: 4
+카운트: 5
+```
+
+## do-while문
+
+최소 한 번은 실행하고, 그 후 조건을 검사한다.
+
+```java
+do {
+    // 반복할 코드
+} while (조건);
+```
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int num = 10;
+        
+        do {
+            System.out.println("숫자: " + num);
+            num--;
+        } while (num > 5);
+    }
+}
+```
+
+출력:
+
+```
+숫자: 10
+숫자: 9
+숫자: 8
+숫자: 7
+숫자: 6
+```
+
+## break와 continue
+
+- `break` : 반복문을 즉시 종료
+- `continue` : 현재 반복을 건너뛰고 다음 반복으로
+
+예시 코드:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // break 예시
+        for (int i = 1; i <= 10; i++) {
+            if (i == 5) {
+                break;
+            }
+            System.out.println(i);
+        }
+        
+        System.out.println("---");
+        
+        // continue 예시
+        for (int i = 1; i <= 5; i++) {
+            if (i == 3) {
+                continue;
+            }
+            System.out.println(i);
+        }
+    }
+}
+```
+
+출력:
+
+```
+1
+2
+3
+4
+---
+1
+2
+4
+5
+```
+
+다음 내용에서는 배열, 메소드, 클래스와 객체 등 더 심화된 내용을 다룰 예정이다.​​​​​​​​​​​​​​​​
 
 # 오류제보
 C++ 메인으로 코딩을 하다 보니, 실수를 하는 경우가 많다.
