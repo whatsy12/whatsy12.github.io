@@ -8,7 +8,7 @@ tags:
 ---
 학교에서 Make Money라는 크롬 확장 게임이 유행해서 이 글을 작성했다.
 
-</br>
+
 
 ## 돈 복사하는 법
 <img width="1909" height="953" alt="스크린샷 2026-11-06 오전 12 14 32" src="https://github.com/user-attachments/assets/f3fafd9b-3070-4db3-ac57-bed05fd00c0c" />
@@ -22,13 +22,13 @@ tags:
 
 아래와 같은 화면이 나타나면 정상이다.
 
-</br>
+
 
 <img width="646" height="638" alt="image" src="https://github.com/user-attachments/assets/1b8af840-46d0-413a-b27d-f785a01a2e1b" />
 
 위와 같은 화면에서 우측 상단에 있는 "Console" 버튼을 누른다. (한국어로 번역이 되어있으면 "콘솔"과 같이 번역되어 있을 수 있음)
 
-</br>
+
 
 <img width="650" height="638" alt="image" src="https://github.com/user-attachments/assets/6f03bc48-b35e-406a-8642-96cd150ee358" />
 
@@ -36,17 +36,17 @@ tags:
 
 원래 상태에서는 코드를 복사하거나 붙여넣을 수 없기에, '>' 우측에 아무 글자를 **복사**해서 입력한다.
 
-</br>
+
 
 <img width="638" height="639" alt="image" src="https://github.com/user-attachments/assets/e35ad939-ca1e-4b61-866f-afdd57909917" />
 
 지금까지 성공적으로 진행했다면 해당 화면이 나타날 것이다.
 
-</br>
+
 
 영문으로 "allow pasting"을 입력하고, 아래 3개의 코드 중 아무 코드를 **있는 그대로** 붙여넣는다.
 
-</br>
+
 
 1. 돈, 보너스 클릭, 프레스티지 수정
 
@@ -63,7 +63,6 @@ chrome.storage.sync.get("game_data", (data) => {
 });
 ```
 
-</br>
 
 2. 모든 아이템 보유 처리
 
@@ -81,7 +80,7 @@ chrome.storage.sync.get("game_data", (data) => {
 });
 ```
 
-</br>
+
 
 3. 업그레이드 전부 구매 처리
 
@@ -102,7 +101,7 @@ chrome.storage.sync.get("game_data", (data) => {
 
 ```
 
-</br>
+
 
 ## Troubleshooting
 
