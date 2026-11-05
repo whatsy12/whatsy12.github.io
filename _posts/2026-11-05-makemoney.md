@@ -48,7 +48,7 @@ tags:
 
 
 
-1. 돈, 보너스 클릭, 프레스티지 수정
+- 돈, 보너스 클릭, 프레스티지 수정
 
 ``` javascript
 chrome.storage.sync.get("game_data", (data) => {
@@ -64,7 +64,7 @@ chrome.storage.sync.get("game_data", (data) => {
 ```
 
 
-2. 모든 아이템 보유 처리
+- 모든 아이템 보유 처리
 
 
 ``` javascript
@@ -82,7 +82,7 @@ chrome.storage.sync.get("game_data", (data) => {
 
 
 
-3. 업그레이드 전부 구매 처리
+- 업그레이드 전부 구매 처리
 
 ``` javascript
 chrome.storage.sync.get("game_data", (data) => {
