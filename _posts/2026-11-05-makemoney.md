@@ -2,7 +2,7 @@
 title: "Make Money 돈 무한복사 튜토리얼"
 date: 2026-11-05 23:32:17
 categories:
-- 기타
+- else
 tags:
 - 게임
 ---
